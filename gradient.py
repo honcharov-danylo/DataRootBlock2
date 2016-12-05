@@ -49,6 +49,6 @@ def gradient_descent(dimensions,minX,maxX,limit,learning_rate,f):
     print("Final values of x",values)
     print("Final value of cost function",f.function(values))
     return values
-
-function=Function_hypersphere()
-print(gradient_descent(10,-100,100,0.01,0.1,function))
+if __name__=="__main__":
+    function=Function_hypersphere()
+    print(gradient_descent(10,-100,100,0.01,0.1,function))
