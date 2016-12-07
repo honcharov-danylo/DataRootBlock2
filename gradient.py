@@ -45,10 +45,10 @@ def gradient_descent(dimensions,minX,maxX,limit,learning_rate,f,epochs=1500):
         cost=f.function(values)
         iteration_counter+=1
         if iteration_counter>epochs:break
-        print("Current values ",values," cost: ",cost)
+   #     print("Current values ",values," cost: ",cost)
     print("Grad. descent ended in a ",iteration_counter," iterations.")
     print("Final values of x",values)
-    print("Final value of cost function",f.function(values))
+   #print("Final value of cost function",f.function(values))
     return values
 if __name__=="__main__":
     function=Function_hypersphere()
