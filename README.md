@@ -6,3 +6,33 @@ http://www.bogotobogo.com/python/python_numpy_batch_gradient_descent_algorithm.p
 http://machinelearningmastery.com/gradient-descent-for-machine-learning/
 http://sebastianruder.com/optimizing-gradient-descent/index.html#batchgradientdescent
 https://habrahabr.ru/post/272679/
+
+Linear regression
+  dataset from http://college.cengage.com/mathematics/brase/understandable_statistics/7e/students/datasets/slr/frames/frame.html
+
+https://onlinecourses.science.psu.edu/stat501/node/250
+http://www.cleverstudents.ru/articles/mnk.html
+
+Logistic regression
+http://machinelearningmastery.com/logistic-regression-for-machine-learning/
+//dataset from https://www.umass.edu/statdata/statdata/stat-logistic.html
+http://nbviewer.jupyter.org/github/tfolkman/learningwithdata/blob/master/Logistic%20Gradient%20Descent.ipynb
+
+MLE
+http://stats.stackexchange.com/questions/112451/maximum-likelihood-estimation-mle-in-layman-terms
+https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA
+https://www.statlect.com/fundamentals-of-statistics/normal-distribution-maximum-likelihood
+
+Generalized linear models (?)
+https://en.wikipedia.org/wiki/Generalized_linear_model
+http://stats.stackexchange.com/questions/27651/how-would-you-explain-generalized-linear-models-to-people-with-no-statistical-ba
+http://psych.colorado.edu/~carey/qmin/qminchapters/qmin09-glmintro.pdf
+http://statsoft.ru/home/textbook/modules/stgenerlinmod.html
+
+Naive Bayes Classifier
+https://www.analyticsvidhya.com/blog/2015/09/naive-bayes-explained/
+https://alexn.org/blog/2012/02/09/howto-build-naive-bayes-classifier.html
+https://habrahabr.ru/post/120194/
+dataset from
+http://machinelearningmastery.com/naive-bayes-classifier-scratch-python/
+http://bazhenov.me/blog/2012/06/11/naive-bayes.html
