@@ -1,4 +1,4 @@
-import gradient
+import gradient.gradient as gradient
 import math
 import random
 
