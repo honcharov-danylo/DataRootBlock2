@@ -70,7 +70,7 @@ def calculate_coef_b0(model,b1):
 #if we have only two parameters b0 and b1 we can calculate it.
 #Ok, maybe we can calculate it anyway, using calculus, even if we have more than 2 koef
 #but we have gradient descent from the previus task. Let's use it,lol
-class Function_for_calculation_koefs(Function_class):
+class Function_for_calculation_linear_koefs(Function_class):
     def __init__(self,model):
         self.model=model
     def function(self,param):
@@ -104,22 +104,54 @@ class Function_for_calculation_koefs(Function_class):
         sum*=-2
         return sum
 
+class Function_for_calculating_logistic_koefs(Function_class):
+    def __init__(self,model):
+        self.model=model
+    def e_power_x_vect(self,param,x_vect):
+        power=param[0]
+        for i in range(len(x_vect)):
+            power += param[i + 1] * x_vect[i]
+        return exp(power)
+
+    def f(self,param,x_vect):
+        #power=param[0]
+        # for i in range(len(x_vect)):
+        #     power+=param[i+1]*x_vect[i]
+        return 1/(1+self.e_power_x_vect(param,x_vect))
+
+    def function(self,param):
+        log_sum=0
+        for m in model.keys():
+            for x_vect in model[m]:
+                if(m==1):
+                    log_sum=m*math.log(self.f(param,x_vect))
+                else:
+                    log_sum=(1-m)*math.log(1-self.f(param,x_vect))
+        return log_sum
+
+    def derivative_by_part_x(self,x,index_of_x,vector_of_x):
+        sum=0;
+        for m in model.keys():
+            sum_of_line=0
+            for x_vect in model[m]:
+                sum_of_line+=(1-m-m*self.e_power_x_vect(vector_of_x,x_vect))/(self.e_power_x_vect(vector_of_x,x_vect)+1)
+                if(index_of_x!=0): sum_of_line*=x
+            sum+=sum_of_line
+        return sum
+
 def linear_regression(model):
     b1=calculate_koef_b1(model)
     b0=calculate_coef_b0(model,b1)
     return [b0,b1]
 
 
-def logistic_regression(model,x_vector,koefs):
+def logistic_regression(x_vector,koefs):
     power=koefs[0]
     for i in range(len(x_vector)):
         power+=x_vector[i]*koefs[i+1]
-    try:
-       exponent=exp(power)
-    except OverflowError:
-       return 0
-    probability=exponent/(1+exponent)
-    return probability
+    exponent=exp(power)
+    probability=1/(1+exponent)
+    return 1-probability
 
 
 #linear_regression(0)
@@ -131,7 +163,7 @@ if(__name__=="__main__"):
     model.pop("Y","") #removing some useless stuff
     koefs=linear_regression(model)
 
-    koefs_func=Function_for_calculation_koefs(model)
+    koefs_func=Function_for_calculation_linear_koefs(model)
     koefs_by_grad=list(gradient_descent(2,-10,10,0.1,0.1,koefs_func))
     print("Koefs by gradient ",koefs_by_grad)
     print("Koefs by formulas ",koefs)
@@ -162,14 +194,13 @@ if(__name__=="__main__"):
     pointsX=[]
     pointsY=[]
 
-    print(model)
-    koefs_func=Function_for_calculation_koefs(model)
+    koefs_func=Function_for_calculating_logistic_koefs(model)
 
-    koefs = list(gradient_descent(2, -5, 5, 0.1, 0.1, koefs_func))
-
+    koefs = list(gradient_descent(2, 1, 10, float("1.5e-30"), 0.1, koefs_func,3000,False))
+    print(koefs)
     for i in range(70):
              pointsX.append(i)
-             pointsY.append(logistic_regression(model,[i],koefs))
+             pointsY.append(logistic_regression([i],koefs))
 
 
     p = figure(title="Logistic regression", x_axis_label='x', y_axis_label='y')

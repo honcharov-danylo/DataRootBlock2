@@ -30,7 +30,7 @@ class Function_hypersphere(Function_class): #ok, the function will be f(x1,x2,x3
         #actually, we don't care about index in this funcion
         return 2*x
 
-def gradient_descent(dimensions,minX,maxX,limit,learning_rate,f,epochs=1500):
+def gradient_descent(dimensions,minX,maxX,limit,learning_rate,f,epochs=1500,minimize=True):
     values=[]   #initializing
     for i in range(dimensions):
         values.append(random.randrange(minX,maxX))
@@ -41,14 +41,15 @@ def gradient_descent(dimensions,minX,maxX,limit,learning_rate,f,epochs=1500):
             if(f.derivative_by_part_x(values[i],i,values)>0):
                 delta=-1
             else: delta=1
+            if not minimize: delta*=-1
             values[i]=values[i]+learning_rate*delta
         cost=f.function(values)
         iteration_counter+=1
         if iteration_counter>epochs:break
-   #     print("Current values ",values," cost: ",cost)
+        #print("Current values ",values," cost: ",cost)
     print("Grad. descent ended in a ",iteration_counter," iterations.")
     print("Final values of x",values)
-   #print("Final value of cost function",f.function(values))
+    print("Final value of cost function",f.function(values))
     return values
 if __name__=="__main__":
     function=Function_hypersphere()
