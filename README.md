@@ -9,13 +9,12 @@ https://habrahabr.ru/post/272679/
 
 2. Linear regression
   dataset from http://college.cengage.com/mathematics/brase/understandable_statistics/7e/students/datasets/slr/frames/frame.html
-
 https://onlinecourses.science.psu.edu/stat501/node/250
 http://www.cleverstudents.ru/articles/mnk.html
 
 3. Logistic regression
 http://machinelearningmastery.com/logistic-regression-for-machine-learning/
-//dataset from https://www.umass.edu/statdata/statdata/stat-logistic.html
+dataset from https://www.umass.edu/statdata/statdata/stat-logistic.html
 http://nbviewer.jupyter.org/github/tfolkman/learningwithdata/blob/master/Logistic%20Gradient%20Descent.ipynb
 
 4. MLE
