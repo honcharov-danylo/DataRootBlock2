@@ -39,20 +39,6 @@ class NaiveBayesClassificator():
                         class_max_prob = sm
         return class_max_index
 
-
-                # def classificate(self,x_vect):
-    #     class_max_index=0
-    #     class_max_prob=0
-    #     for c in self.classes_freq:
-    #         sum=self.classes_freq[c]
-    #         for word in x_vect:
-    #             sum*=self.words[c, word]
-    #         if(sum>class_max_prob):
-    #             print("Sum is ",sum)
-    #             class_max_index=c
-    #             class_max_prob=sum
-    #     return class_max_index
-
 if(__name__=="__main__"):
     model=regression.read_model("../naive_bayes_classificator/pima-indians-diabetes.csv")
     nb=NaiveBayesClassificator(model)
