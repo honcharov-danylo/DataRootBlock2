@@ -5,9 +5,8 @@ from bokeh.plotting import figure, output_file, save,show
 
 def dist(point1,point2):
     sm=0
-    for p1 in point1:
-        for p2 in point2:
-            sm+=pow(p1-p2,2)
+    for i in range(len(point1)):
+        sm+=pow(point1[i]-point2[i],2)
     return math.sqrt(sm)
 
 def cluster_points(x_points,centroids):
@@ -19,7 +18,6 @@ def cluster_points(x_points,centroids):
                 mn=c
         if(tuple(mn) in clusters):clusters[tuple(mn)].append(x_vect)
         else: clusters[tuple(mn)]=[x_vect]
-    print(clusters)
     return clusters
 
 def better_centroids(clusters):
@@ -33,12 +31,16 @@ def better_centroids(clusters):
     return centroids
 
 def has_converged(centroids, old_centroids):
-    print(set([tuple(a) for a in centroids]))
     return set([tuple(a) for a in centroids]) == set([tuple(a) for a in old_centroids])
 
 def find_centers(X, K):
-    centroids = random.sample(X, K)
-    centroids_new = random.sample(X, K)
+    #centroids = random.sample(X, K)
+    #centroids_new = random.sample(X, K)
+    centroids=[]
+    centroids_new=[]
+    for i in range(K):
+        centroids.append(X[random.randrange(0,len(X))])
+        centroids_new.append(X[random.randrange(0, len(X))])
     while not has_converged(centroids_new, centroids):
         centroids = centroids_new
         clusters = cluster_points(X, centroids_new)
@@ -48,16 +50,14 @@ def find_centers(X, K):
 
 if(__name__=="__main__"):
     points=[]
-    for i in range(150):
-        points.append([random.randrange(-20,20),random.randrange(-20,20)])
-    centroids_number=5
+    for i in range(200):
+        points.append([random.randrange(-50,50),random.randrange(-50,50)])
+    centroids_number=7
     centroids,clusters=find_centers(points,centroids_number)
     print(len(centroids))
 
     p = figure(title="Kmeans", x_axis_label='x', y_axis_label='y')
 
-    startColor=[100,100,100]
-    print(clusters)
     for c in clusters:
         x_list=[f[0] for f in clusters[c]]
         y_list=[f[1] for f in clusters[c]]
@@ -65,13 +65,10 @@ if(__name__=="__main__"):
         x_cluster=c[0]
         y_cluster = c[1]
 
+        startColor = [random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)]
         p.circle(x_list, y_list, size=20, legend="Points 1.", color=tuple(startColor),
              alpha=0.5)
         p.asterisk(x_cluster,y_cluster,size=20,legend="Centroids",color="green")
-        r=random.randrange(0,len(startColor))
-        if(startColor[r]+100<255):
-            startColor[r]+=100
-        else: startColor[r]-=100
 
     # p.circle(points2x, points2y, size=20, legend="Points 2.", color="orange",
     #          alpha=0.5)
