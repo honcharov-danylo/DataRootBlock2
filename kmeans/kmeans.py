@@ -54,7 +54,6 @@ if(__name__=="__main__"):
         points.append([random.randrange(-50,50),random.randrange(-50,50)])
     centroids_number=7
     centroids,clusters=find_centers(points,centroids_number)
-    print(len(centroids))
 
     p = figure(title="Kmeans", x_axis_label='x', y_axis_label='y')
 
@@ -66,9 +65,9 @@ if(__name__=="__main__"):
         y_cluster = c[1]
 
         startColor = [random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)]
-        p.circle(x_list, y_list, size=20, legend="Points 1.", color=tuple(startColor),
+        p.circle(x_list, y_list, size=20, legend="Points.", color=tuple(startColor),
              alpha=0.5)
-        p.asterisk(x_cluster,y_cluster,size=20,legend="Centroids",color="green")
+        p.asterisk(x_cluster,y_cluster,size=25,legend="Centroids",color="green")
 
     # p.circle(points2x, points2y, size=20, legend="Points 2.", color="orange",
     #          alpha=0.5)
