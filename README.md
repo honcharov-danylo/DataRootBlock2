@@ -32,38 +32,36 @@ http://statsoft.ru/home/textbook/modules/stgenerlinmod.html
 https://www.analyticsvidhya.com/blog/2015/09/naive-bayes-explained/
 https://alexn.org/blog/2012/02/09/howto-build-naive-bayes-classifier.html
 https://habrahabr.ru/post/120194/
-dataset from
+  dataset from
 http://machinelearningmastery.com/naive-bayes-classifier-scratch-python/
 http://bazhenov.me/blog/2012/06/11/naive-bayes.html
 
-Gaussuan Discriminant Analisys
+7. Gaussuan Discriminant Analisys
 https://www.projectrhea.org/rhea/index.php/Discriminant_Functions_For_The_Normal(Gaussian)_Density
 https://www.projectrhea.org/rhea/index.php/Discriminant_Functions_For_The_Normal(Gaussian)_Density_-_Part_2
 https://cosmolearning.org/video-lectures/learning-algorithms-generative-gaussian-discriminant-analysis-digression/
 
 
-SVM
+8. SVM
 https://habrahabr.ru/post/105220/
 http://www.machinelearning.ru/wiki/index.php?title=SVM
 https://pythonprogramming.net/svm-in-python-machine-learning-tutorial/
 
-
-
-kmeans
+9. kmeans
 https://datasciencelab.wordpress.com/2013/12/12/clustering-with-k-means-in-python/
 https://pythonprogramming.net/k-means-from-scratch-machine-learning-tutorial/?completed=/k-means-titanic-dataset-machine-learning-tutorial/
 http://stanford.edu/~cpiech/cs221/handouts/kmeans.html
 
 
-Regularization
+10. Regularization
 https://habrahabr.ru/post/278513/
 https://www.quora.com/What-is-regularization-in-machine-learning
 https://en.wikipedia.org/wiki/Regularization_(mathematics)
 
-PCA
+11. PCA
 https://habrahabr.ru/post/304214/
 http://sebastianraschka.com/Articles/2014_pca_step_by_step.html#introduction
 
-ICA
+12. ICA
 http://cis.legacy.ics.tkk.fi/aapo/papers/IJCNN99_tutorialweb/
 https://sccn.ucsd.edu/~arno/indexica.html
