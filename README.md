@@ -55,17 +55,12 @@ http://stanford.edu/~cpiech/cs221/handouts/kmeans.html
 
 10. Regularization
 https://habrahabr.ru/post/278513/
-
 https://www.quora.com/What-is-regularization-in-machine-learning
-
 https://en.wikipedia.org/wiki/Regularization_(mathematics)
 
 11. PCA
 https://habrahabr.ru/post/304214/
-
 http://sebastianraschka.com/Articles/2014_pca_step_by_step.html#introduction
-
 12. ICA
 http://cis.legacy.ics.tkk.fi/aapo/papers/IJCNN99_tutorialweb/
-
 https://sccn.ucsd.edu/~arno/indexica.html
