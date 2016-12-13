@@ -22,7 +22,7 @@ http://stats.stackexchange.com/questions/112451/maximum-likelihood-estimation-ml
 https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA
 https://www.statlect.com/fundamentals-of-statistics/normal-distribution-maximum-likelihood
 
-5. Generalized linear models (?)
+5. Generalized linear models
 https://en.wikipedia.org/wiki/Generalized_linear_model
 http://stats.stackexchange.com/questions/27651/how-would-you-explain-generalized-linear-models-to-people-with-no-statistical-ba
 http://psych.colorado.edu/~carey/qmin/qminchapters/qmin09-glmintro.pdf
@@ -35,3 +35,35 @@ https://habrahabr.ru/post/120194/
 dataset from
 http://machinelearningmastery.com/naive-bayes-classifier-scratch-python/
 http://bazhenov.me/blog/2012/06/11/naive-bayes.html
+
+Gaussuan Discriminant Analisys
+https://www.projectrhea.org/rhea/index.php/Discriminant_Functions_For_The_Normal(Gaussian)_Density
+https://www.projectrhea.org/rhea/index.php/Discriminant_Functions_For_The_Normal(Gaussian)_Density_-_Part_2
+https://cosmolearning.org/video-lectures/learning-algorithms-generative-gaussian-discriminant-analysis-digression/
+
+
+SVM
+https://habrahabr.ru/post/105220/
+http://www.machinelearning.ru/wiki/index.php?title=SVM
+https://pythonprogramming.net/svm-in-python-machine-learning-tutorial/
+
+
+
+kmeans
+https://datasciencelab.wordpress.com/2013/12/12/clustering-with-k-means-in-python/
+https://pythonprogramming.net/k-means-from-scratch-machine-learning-tutorial/?completed=/k-means-titanic-dataset-machine-learning-tutorial/
+http://stanford.edu/~cpiech/cs221/handouts/kmeans.html
+
+
+Regularization
+https://habrahabr.ru/post/278513/
+https://www.quora.com/What-is-regularization-in-machine-learning
+https://en.wikipedia.org/wiki/Regularization_(mathematics)
+
+PCA
+https://habrahabr.ru/post/304214/
+http://sebastianraschka.com/Articles/2014_pca_step_by_step.html#introduction
+
+ICA
+http://cis.legacy.ics.tkk.fi/aapo/papers/IJCNN99_tutorialweb/
+https://sccn.ucsd.edu/~arno/indexica.html
