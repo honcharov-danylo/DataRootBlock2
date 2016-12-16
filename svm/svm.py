@@ -139,29 +139,29 @@ class Support_Vector_Machine:
 if(__name__=="__main__"):
     model = regression.read_model("../svm/points.csv")
     data_dict={i:np.array(model[i]) for i in model.keys()}
-    # svm=Support_Vector_Machine()
-    # w,b=svm.fit(data_dict)
-    # print("w=",w," b=",b)
+    svm=Support_Vector_Machine()
+    w,b=svm.fit(data_dict)
+    print("w=",w," b=",b)
 
-    func=Function_for_svm(model)
-    koefs=gradient.gradient_descent(6,0,10,0.000000000001,0.001,func,2000,False)
-    b=func.get_b(koefs)
-    print(b)
-    w=func.get_w(koefs)
-    print(w)
+    # func=Function_for_svm(model)
+    # koefs=gradient.gradient_descent(6,0,10,0.000000000001,0.001,func,2000,False)
+    # b=func.get_b(koefs)
+    # print(b)
+    # w=func.get_w(koefs)
+    # print(w)
 
-    # line_points ={}
-    # line_points[-20]=svm.line(-20,w,b,0)
-    # line_points[20] = svm.line(20, w, b, 0)
-    #
-    # first_svm={}
-    # first_svm[-20] = svm.line(-20, w, b, -1)
-    # first_svm[20] = svm.line(20, w, b, -1)
-    #
-    #
-    # second_svm={}
-    # second_svm[-20] = svm.line(-20, w, b, 1)
-    # second_svm[20] = svm.line(20, w, b, 1)
+    line_points ={}
+    line_points[-20]=svm.line(-20,w,b,0)
+    line_points[20] = svm.line(20, w, b, 0)
+
+    first_svm={}
+    first_svm[-20] = svm.line(-20, w, b, -1)
+    first_svm[20] = svm.line(20, w, b, -1)
+
+
+    second_svm={}
+    second_svm[-20] = svm.line(-20, w, b, 1)
+    second_svm[20] = svm.line(20, w, b, 1)
 
     p = figure(title="SVM", x_axis_label='x', y_axis_label='y')
 
