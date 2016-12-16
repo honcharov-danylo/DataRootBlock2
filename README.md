@@ -31,8 +31,7 @@ http://statsoft.ru/home/textbook/modules/stgenerlinmod.html
 6. Naive Bayes Classifier
 https://www.analyticsvidhya.com/blog/2015/09/naive-bayes-explained/
 https://alexn.org/blog/2012/02/09/howto-build-naive-bayes-classifier.html
-https://habrahabr.ru/post/120194/
-  dataset from
+dataset from https://habrahabr.ru/post/120194/
 http://machinelearningmastery.com/naive-bayes-classifier-scratch-python/
 http://bazhenov.me/blog/2012/06/11/naive-bayes.html
 
