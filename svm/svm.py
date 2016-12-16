@@ -174,15 +174,13 @@ if(__name__=="__main__"):
     p.circle(points2x, points2y, size=20, legend="Points 2.", color="orange",
              alpha=0.5)
 
-    # p.line(list(line_points.keys()), list(line_points.values()), legend="SVM.",
-    #         color="green", line_width=2)
-    #
-    # p.line(list(first_svm.keys()), list(first_svm.values()), legend="support vector=-1",
-    #        color="blue", line_width=1)
-    # p.line(list(second_svm.keys()), list(second_svm.values()), legend="support vector=1",
-    #        color="gray", line_width=1)
+    p.line(list(line_points.keys()), list(line_points.values()), legend="SVM.",
+            color="green", line_width=2)
 
-    # p.line(list(pointsByGradient.keys()), list(pointsByGradient.values()), legend="Linear regression line by gradient.",
-    #        color="violet", line_width=2)
+    p.line(list(first_svm.keys()), list(first_svm.values()), legend="support vector=-1",
+           color="blue", line_width=1)
+    p.line(list(second_svm.keys()), list(second_svm.values()), legend="support vector=1",
+           color="gray", line_width=1)
+
     output_file("svm.html")
     save(p)
