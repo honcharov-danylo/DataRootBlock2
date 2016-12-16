@@ -23,14 +23,14 @@ class NaiveBayesClassificator():
             self.classes_freq[m]/=len(model)
 
     def classificate(self, x_vect):
-        class_max_index = 0
+        class_max_index = list(self.classes_freq.keys())[0]
         class_max_prob = 0
         for c in self.classes_freq:
                 print("testing ",x_vect," ",c)
-                sm =log(self.classes_freq[c])
+                sm =-log(self.classes_freq[c])
                 for word in x_vect:
                     if(self.words[c, word]!=0):
-                        sm += log(self.words[c, word])
+                        sm += -log(self.words[c, word])
                     else: sm-=float("1.2e-15")
                 print(sm)
                 if (sm < class_max_prob):
@@ -40,13 +40,17 @@ class NaiveBayesClassificator():
         return class_max_index
 
 if(__name__=="__main__"):
-    model=regression.read_model("../naive_bayes_classificator/pima-indians-diabetes.csv")
+   # model=regression.read_model("../naive_bayes_classificator/pima-indians-diabetes.csv")
+    model = regression.read_model("../naive_bayes_classificator/names.csv")
+    model={k:[i[0][len(i[0])-1] for i in model[k]] for k in model.keys()}
+    print(model)
     nb=NaiveBayesClassificator(model)
     nb.train()
-    model_test=regression.read_model("../naive_bayes_classificator/test.csv")
-    print("First test from the train case: should have 1")
-    print(nb.classificate([9,119,80,35,0,29.0,0.263,29]))
-    print("\r\nNext tests from the test case")
+    model_test=regression.read_model("../naive_bayes_classificator/test_names.csv")
+    model_test = {k: [i[0][len(i[0]) - 1] for i in model_test[k]] for k in model_test.keys()}
+    # print("First test from the train case: should have 1")
+    # print(nb.classificate([9,119,80,35,0,29.0,0.263,29]))
+    # print("\r\nNext tests from the test case")
     right_ans=0
     counter=0
     for i in model_test.keys():
@@ -55,6 +59,7 @@ if(__name__=="__main__"):
             print("should have ",i)
             answer=nb.classificate(x_vect)
             print(answer)
+            #print(list(model.keys())[int(answer)])
             if(answer==i):
                 right_ans+=1
                 print("\r\n")
