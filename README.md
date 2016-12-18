@@ -45,6 +45,10 @@ https://cosmolearning.org/video-lectures/learning-algorithms-generative-gaussian
 https://habrahabr.ru/post/105220/
 http://www.machinelearning.ru/wiki/index.php?title=SVM
 https://pythonprogramming.net/svm-in-python-machine-learning-tutorial/
+http://cs229.stanford.edu/materials/smo.pdf
+http://www.svm-tutorial.com/2015/06/svm-understanding-math-part-3/
+SMO http://cs229.stanford.edu/materials/smo.pdf
+https://github.com/LasseRegin/SVM-w-SMO
 
 9. kmeans
 https://datasciencelab.wordpress.com/2013/12/12/clustering-with-k-means-in-python/
