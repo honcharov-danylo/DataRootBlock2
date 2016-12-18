@@ -1,67 +1,95 @@
 import gradient.gradient as gradient
 import numpy as np
+import random
 import regression.regression as regression
 from bokeh.plotting import figure, output_file, save,show
 
 import math
 
-class Function_for_svm(gradient.Function_class):
-    def __init__(self,model):
-        self.model=model
+#simple smo realization
+#work horrible, but... work
+class my_svm:
+    def __init__(self,model,C,kernel):
+        #self.model=model
+        self.model = {i: np.array(model[i]) for i in model.keys()}
+        self.C=C
+        self.X_array=[]
+        self.Y_array=[]
+        self.kernel=kernel
+        for k in self.model:
+            for x_vect in self.model[k]:
+                self.X_array.append(x_vect)
+                self.Y_array.append(k)
+        self.Y_array=np.array(self.Y_array)
+        self.X_array=np.array(self.X_array)
+        #print(self.X_array," ",self.Y_array)
 
-    def function(self, param):
-        first_part=sum(param)
-        #second_part=0.5*math.pow(sum([a*x*y for y in self.model.keys() for x in self.model[y] for a in param]),2)
-        second_part=0
-        tmp_sum=0
-        for l in param:
-            for y in self.model.keys():
-                for x_vect in self.model[y]:
-                    for x in x_vect:
-                        tmp_sum+=y*l
-                        second_part+=l*y*x
-        if(tmp_sum!=0): return -(first_part-second_part*second_part)
-        return first_part-second_part*second_part/2
 
-    def derivative(self, param):
-        return sum([a*y for y in self.model.keys() for a in param]) #actually, we don't use this, so doesn't matter
+    def function(self,X):
+        return np.sign(np.dot(self.w.T, X.T) + self.b).astype(int)
 
-    def derivative_by_part_x(self, x, index_of_x, vector_of_x):
-        sum=0
-        tmp_sum=0
-        for l in vector_of_x:
-            for y in self.model.keys():
-                for i in range(len(self.model[y])):
-                    if i != index_of_x:
-                        for x in self.model[y][i]:
-                                tmp_sum+=l*y
-                                sum += l * y * x
-        if(tmp_sum!=0):return -sum;
-        return sum
+    def get_w(self,a, y, X):
+        return np.dot(a * y, X)
 
-    def get_w(self,lambdas):
-        w=[]
-        for l in lambdas:
-            for y in self.model.keys():
-                for x_vect in self.model[y]:
-                    for x in x_vect:
-                            w.append(x*y*l)
-        return w
-    def get_b(self, lambdas):
-        #b=1/list(model.keys())[0]-sum([x*w for x in self.model[list(self.model.keys())[0]] for w in koefs])
-        koefs=self.get_w(lambdas)
-        b=1/list(self.model.keys())[0]
-        for w in koefs:
-            for x_vect in self.model[list(self.model.keys())[0]]:
-                for x in x_vect:
-                    b-=x*w
+    def train(self,max_passes=20000):
+        n=len(self.Y_array)
+        a=np.zeros(n)
+        self.b=0; #◦ Initialize αi = 0, ∀i, b = 0.
+        passes=0 #initialize passes=0
+
+        while (passes < max_passes):
+            #num_changed_alphas = 0.
+            for i in range(n):
+                self.w = self.get_w(a, self.Y_array, self.X_array)
+                self.b = self.get_b(self.X_array, self.Y_array, self.w)
+
+                Ei = self.function(self.X_array[i]) - self.Y_array[i]
+
+                j=random.randint(0,n-1)
+                while j==i: j=random.randint(0,len(model)-1)
+                Ej = self.function(self.X_array[j]) - self.Y_array[j]
+
+                ai_old=a[i] #save old a
+                aj_old=a[j]
+                y_j,y_i=self.Y_array[j],self.Y_array[i]
+                (L, H) = self.compute_L_H(self.C, aj_old, ai_old, y_j, y_i)
+                if(L==H):continue
+                nu=self.kernel(self.X_array[i],self.X_array[i])+self.kernel(self.X_array[j],self.X_array[j])-\
+                2*self.kernel(self.X_array[j],self.X_array[i])
+                if nu==0:continue
+                a[j] = aj_old + float(y_j * (Ei - Ej)) / nu
+                a[j] = max(a[j], L)
+                a[j] = min(a[j], H)
+
+                a[i] = ai_old + y_i * y_j * (aj_old - a[j])
+
+                # print(passes," w=",self.w," b=",self.b)
+            passes+=1
+        self.b = self.get_b(self.X_array, self.Y_array, self.w)#,a)
+        self.w = self.get_w(a, self.Y_array, self.X_array)
+
+        return self.w,self.b
+
+    def compute_L_H(self, C, a_j, a_i, y_j, y_i):
+        if (y_i != y_j):
+            return (max(0, a_j - a_i), min(C, C - a_i + a_j))
+        else:
+            return (max(0, a_i + a_j - C), min(C, a_i + a_j))
+
+    def get_b(self, X, y, w):
+         b_tmp = y - np.dot(w.T, X.T)
+         return np.mean(b_tmp)
+
+    def get_b_final(self,X,y,w,a):
+        a_v = np.where(a > 0)[0]
+        b=1/y[a_v[0]]- np.dot(w.T, X[a_v[0]].T)
         return b
 
+    def kernel_linear(x1, x2):
+        return np.dot(x1, x2.T)
 
+#not mine, actually,this thing work better
 class Support_Vector_Machine:
-
-    def line(self,x, w, b, v):
-        return (-w[0] * x - b + v) / w[1]
 
     def fit(self, data):
         self.data = data
@@ -133,35 +161,33 @@ class Support_Vector_Machine:
         return classification
 
 
-
+def line(x, w, b, v):
+        return (-w[0] * x - b + v) / w[1]
 
 
 if(__name__=="__main__"):
     model = regression.read_model("../svm/points.csv")
-    data_dict={i:np.array(model[i]) for i in model.keys()}
-    svm=Support_Vector_Machine()
-    w,b=svm.fit(data_dict)
-    print("w=",w," b=",b)
+    mysvm=my_svm(model,1,my_svm.kernel_linear)
+    w,b=mysvm.train()
+    print("w=", w, " b=", b)
 
-    # func=Function_for_svm(model)
-    # koefs=gradient.gradient_descent(6,0,10,0.000000000001,0.001,func,2000,False)
-    # b=func.get_b(koefs)
-    # print(b)
-    # w=func.get_w(koefs)
-    # print(w)
+    # data_dict={i:np.array(model[i]) for i in model.keys()}
+    # svm=Support_Vector_Machine()
+    # w,b=svm.fit(data_dict)
+    # print("w=",w," b=",b)
 
     line_points ={}
-    line_points[-20]=svm.line(-20,w,b,0)
-    line_points[20] = svm.line(20, w, b, 0)
+    line_points[-20]=line(-20,w,b,0)
+    line_points[20] = line(20, w, b, 0)
 
     first_svm={}
-    first_svm[-20] = svm.line(-20, w, b, -1)
-    first_svm[20] = svm.line(20, w, b, -1)
+    first_svm[-20] = line(-20, w, b, -1)
+    first_svm[20] =line(20, w, b, -1)
 
 
     second_svm={}
-    second_svm[-20] = svm.line(-20, w, b, 1)
-    second_svm[20] = svm.line(20, w, b, 1)
+    second_svm[-20] = line(-20, w, b, 1)
+    second_svm[20] = line(20, w, b, 1)
 
     p = figure(title="SVM", x_axis_label='x', y_axis_label='y')
 
