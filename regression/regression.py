@@ -124,9 +124,9 @@ class Function_for_calculating_logistic_koefs(Function_class):
         for m in model.keys():
             for x_vect in model[m]:
                 if(m==1):
-                    log_sum=m*math.log(self.f(param,x_vect))
+                    log_sum+=m*math.log(self.f(param,x_vect))
                 else:
-                    log_sum=(1-m)*math.log(1-self.f(param,x_vect))
+                    log_sum+=(1-m)*math.log(1-self.f(param,x_vect))
         return log_sum
 
     def derivative_by_part_x(self,x,index_of_x,vector_of_x):
@@ -159,7 +159,7 @@ def logistic_regression(x_vector,koefs):
 if(__name__=="__main__"):
 
     #working with linear regression now
-    model=read_model('regression/data_for_linear_regression.csv')
+    model=read_model('data_for_linear_regression.csv')
     model.pop("Y","") #removing some useless stuff
     koefs=linear_regression(model)
 
@@ -183,13 +183,13 @@ if(__name__=="__main__"):
     p.line(list(pointsByFormula.keys()), list(pointsByFormula.values()), legend="Linear regression line by formula.", color="red", line_width=2)
     p.line(list(pointsByGradient.keys()), list(pointsByGradient.values()), legend="Linear regression line by gradient.",
            color="violet", line_width=2)
-    output_file("regression/linear_regression.html")
+    output_file("linear_regression.html")
     #p.line(list(pointsLogistic.keys()),list(pointsLogistic.values()),legend="Logistic.", color="violet",line_width=2)
     save(p)
     #ok, we have done all this stuff for linear regressin
     #next, logistic:
 
-    model = read_model('regression/data_for_logistic_regression.csv')
+    model = read_model('data_for_logistic_regression.csv')
     model.pop("CHD","")
     pointsX=[]
     pointsY=[]
@@ -207,5 +207,5 @@ if(__name__=="__main__"):
     p.line(pointsX, pointsY, legend="Logistic regression line.",
            color="green", line_width=2)
 
-    output_file("regression/logistic_regression.html")
+    output_file("logistic_regression.html")
     save(p)
